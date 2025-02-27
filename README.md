@@ -1,22 +1,18 @@
 # GenAI
-RAG-Based virtual assistant (or chatbot) that answers questions only
+**RAG-Based virtual assistant** (or chatbot) that answers questions only
 from the content on the website, using Langchain.
 
-Overview
+**Overview**
 
 This project implements a Retriever-Augmented Generation (RAG) system using LangChain to retrieve and summarize content from a given webpage. It utilizes OpenAI's LLM, FAISS vector database, and RecursiveCharacterTextSplitter for chunking text efficiently. The system is designed to:
 
-Load and extract text from a webpage.
+* Load and extract text from a webpage.
+* Split large documents into smaller chunks.
+* Store vector representations in a FAISS index.
+* Retrieve relevant document snippets based on a user query.
+* Use an LLM to generate summaries and answers to user queries.
 
-Split large documents into smaller chunks.
-
-Store vector representations in a FAISS index.
-
-Retrieve relevant document snippets based on a user query.
-
-Use an LLM to generate summaries and answers to user queries.
-
-Features
+**Features**
 
 ✅ Extracts text from a given URL.
 ✅ Splits content into chunks for efficient processing.
@@ -24,7 +20,7 @@ Features
 ✅ Uses OpenAI's LLM for summarization and Q&A.
 ✅ Fallbacks to LLM if no relevant documents are found.
 
-Installation
+**Installation**
 
 1️⃣ Clone the Repository
 
@@ -45,7 +41,7 @@ Or manually add it to .env:
 
 OPENAI_API_KEY=your_openai_api_key
 
-Usage
+**Usage**
 
 Run the Script
 
@@ -59,12 +55,12 @@ Modify the query variable to retrieve specific information:
 
 query = "Summarize article about seven planets"
 
-Example Output:
+**Example Output:**
 
 Generated Response:
  The BBC article discusses the discovery of seven exoplanets orbiting a distant star, highlighting their potential for habitability...
 
-Code Breakdown
+**Code Breakdown**
 
 1️⃣ Load and Split Webpage Content
 
@@ -102,7 +98,7 @@ query = "Summarize article about seven planets"
 response = qa_chain.run(query)
 print("Generated Response:\n", response)
 
-Future Enhancements
+**Future Enhancements**
 
 ✅ Support multiple document sources.
 
