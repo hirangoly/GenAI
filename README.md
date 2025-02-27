@@ -33,7 +33,7 @@ pip install -r requirements.txt
 
 3️⃣ Set Up OpenAI API Key
 
-Create a .env file and add your OpenAI API key:
+Create a .env file (ini.env) and add your OpenAI API key:
 
 echo "OPENAI_API_KEY=your_openai_api_key" > .env
 
@@ -47,7 +47,7 @@ Run the Script
 
 Modify the url variable inside main.py to your target webpage, then run:
 
-python main.py
+python rag_chatbot.py
 
 Query the Summarized Content
 
@@ -59,44 +59,6 @@ query = "Summarize article about seven planets"
 
 Generated Response:
  The BBC article discusses the discovery of seven exoplanets orbiting a distant star, highlighting their potential for habitability...
-
-**Code Breakdown**
-
-1️⃣ Load and Split Webpage Content
-
-from langchain.document_loaders import WebBaseLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-
-url = "https://www.bbc.com/news/technology"
-loader = WebBaseLoader(url)
-documents = loader.load()
-
-splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100)
-docs = splitter.split_documents(documents)
-
-2️⃣ Store in FAISS Vector Database
-
-from langchain.vectorstores import FAISS
-from langchain.embeddings.openai import OpenAIEmbeddings
-
-embeddings = OpenAIEmbeddings()
-vectorstore = FAISS.from_documents(docs, embeddings)
-vectorstore.save_local("faiss_webpage_index")
-
-3️⃣ Implement RAG-based Retrieval and Query Processing
-
-from langchain.chains import RetrievalQA
-from langchain.llms import OpenAI
-
-llm = OpenAI(temperature=0.7)
-retriever = vectorstore.as_retriever()
-qa_chain = RetrievalQA.from_chain_type(llm=llm, retriever=retriever)
-
-4️⃣ Query the System
-
-query = "Summarize article about seven planets"
-response = qa_chain.run(query)
-print("Generated Response:\n", response)
 
 **Future Enhancements**
 
